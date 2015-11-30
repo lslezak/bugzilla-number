@@ -1,0 +1,13 @@
+'scopeName': 'text.bugzilla-number'
+'name': 'Bugzilla'
+'injectionSelector': 'comment, text, source.gfm'
+'patterns': [
+  {
+    'match': '\\b(bnc|BNC|bsc|BSC|boo|BOO|bug|BUG)\\s*(#|)\\d+\\b'
+    'name': 'storage.type.class.bugzilla-number.bugzilla-number-${1:/downcase}'
+  }
+  {
+    'match': '\\b(fate|FATE)\\s*(#|)\\d+\\b'
+    'name': 'storage.type.class.fate-number'
+  }
+]

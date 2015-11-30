@@ -1,0 +1,13 @@
+{
+  "name": "bugzilla-number",
+  "main": "./lib/bugzilla-number",
+  "version": "0.0.0",
+  "description": "Highlight Bugzilla and FATE numbers in the text",
+  "keywords": ["Bugzilla"],
+  "repository": "https://github.com/lslezak/bugzilla-number",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {}
+}
