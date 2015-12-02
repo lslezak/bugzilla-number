@@ -1,6 +1,6 @@
 'scopeName': 'text.bugzilla-number'
 'name': 'Bugzilla'
-'injectionSelector': 'comment, text, source.gfm'
+'injectionSelector': 'comment, text'
 'patterns': [
   {
     'match': '\\b(bnc|BNC|bsc|BSC|boo|BOO|bug|BUG)\\s*(#|)\\d+\\b'
