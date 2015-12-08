@@ -18,22 +18,12 @@
   # handle special cases
   {
     # gh#repo#number (e.g. gh#yast/core#123)
-    'captures':
-      '1':
-        'name': 'gh-repo'
-      '2':
-        'name': 'gh-issue'
     'match': '\\bgh#(\\S+)#(\\d+)\\b'
     'name': 'storage.type.class.gh-number'
   }
   {
     # CVE-year-number (e.g. CVE-2015-1234)
     # see https://cve.mitre.org/cve/identifiers/syntaxchange.html#new
-    'captures':
-      '1':
-        'name': 'cve-year'
-      '2':
-        'name': 'cve-number'
     'match': '\\bCVE-(\\d{4})-(\\d{4,})\\b'
     'name': 'storage.type.class.cve-number'
   }
