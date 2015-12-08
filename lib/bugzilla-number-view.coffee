@@ -4,7 +4,6 @@
 #     # Create root element
 #     @element = document.createElement('div')
 #     @element.classList.add('bugzilla-number')
-# bnc #1234567 
 #     # Create message element
 #     message = document.createElement('div')
 #     message.textContent = "The BugzillaNumber package is Alive! It's ALIVE!"
