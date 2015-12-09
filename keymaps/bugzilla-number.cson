@@ -2,4 +2,4 @@
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
 
 'atom-text-editor':
-   'ctrl-shift-b': 'bugzilla-number:open-link'
+  'ctrl-shift-b': 'bugzilla-number:open-link'
