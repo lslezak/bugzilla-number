@@ -23,8 +23,6 @@ module.exports = BugzillaNumber =
   deactivate: ->
     @subscriptions.dispose()
 
-  serialize: ->
-
   bugId: ->
     return unless editor = atom.workspace.getActiveTextEditor()
     return unless position = editor.getCursorBufferPosition()
