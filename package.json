@@ -1,9 +1,12 @@
 {
   "name": "bugzilla-number",
   "main": "./lib/bugzilla-number",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Highlight bug numbers (Bugzilla, FATE, CVE ...), open them in a browser",
-  "keywords": ["Bugzilla", "bug number"],
+  "keywords": [
+    "Bugzilla",
+    "bug number"
+  ],
   "repository": "https://github.com/lslezak/bugzilla-number",
   "license": "MIT",
   "engines": {
