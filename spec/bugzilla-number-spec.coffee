@@ -1,62 +1,38 @@
+# test the editor integration
+
+shell = require 'shell'
 BugzillaNumber = require '../lib/bugzilla-number'
 
-# Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
-#
-# To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
-# or `fdescribe`). Remove the `f` to unfocus the block.
+describe "BugzillaNumber", ->
+  workspaceElement = null
+  editor = null
 
-# describe "BugzillaNumber", ->
-#   [workspaceElement, activationPromise] = []
-#
-#   beforeEach ->
-#     workspaceElement = atom.views.getView(atom.workspace)
-#     activationPromise = atom.packages.activatePackage('bugzilla-number')
-#
-#   describe "when the bugzilla-number:toggle event is triggered", ->
-#     it "hides and shows the modal panel", ->
-#       # Before the activation event the view is not on the DOM, and no panel
-#       # has been created
-#       expect(workspaceElement.querySelector('.bugzilla-number')).not.toExist()
-#
-#       # This is an activation event, triggering it will cause the package to be
-#       # activated.
-#       atom.commands.dispatch workspaceElement, 'bugzilla-number:toggle'
-#
-#       waitsForPromise ->
-#         activationPromise
-#
-#       runs ->
-#         expect(workspaceElement.querySelector('.bugzilla-number')).toExist()
-#
-#         bugzillaNumberElement = workspaceElement.querySelector('.bugzilla-number')
-#         expect(bugzillaNumberElement).toExist()
-#
-#         bugzillaNumberPanel = atom.workspace.panelForItem(bugzillaNumberElement)
-#         expect(bugzillaNumberPanel.isVisible()).toBe true
-#         atom.commands.dispatch workspaceElement, 'bugzilla-number:toggle'
-#         expect(bugzillaNumberPanel.isVisible()).toBe false
-#
-#     it "hides and shows the view", ->
-#       # This test shows you an integration test testing at the view level.
-#
-#       # Attaching the workspaceElement to the DOM is required to allow the
-#       # `toBeVisible()` matchers to work. Anything testing visibility or focus
-#       # requires that the workspaceElement is on the DOM. Tests that attach the
-#       # workspaceElement to the DOM are generally slower than those off DOM.
-#       jasmine.attachToDOM(workspaceElement)
-#
-#       expect(workspaceElement.querySelector('.bugzilla-number')).not.toExist()
-#
-#       # This is an activation event, triggering it causes the package to be
-#       # activated.
-#       atom.commands.dispatch workspaceElement, 'bugzilla-number:toggle'
-#
-#       waitsForPromise ->
-#         activationPromise
-#
-#       runs ->
-#         # Now we can test for view visibility
-#         bugzillaNumberElement = workspaceElement.querySelector('.bugzilla-number')
-#         expect(bugzillaNumberElement).toBeVisible()
-#         atom.commands.dispatch workspaceElement, 'bugzilla-number:toggle'
-#         expect(bugzillaNumberElement).not.toBeVisible()
+  beforeEach ->
+    workspaceElement = atom.views.getView(atom.workspace)
+    waitsForPromise -> atom.packages.activatePackage('bugzilla-number')
+    waitsForPromise -> atom.workspace.open('test.txt')
+
+    runs ->
+      editor = atom.workspace.getActiveTextEditor()
+      editor.insertText('# fixes bug bsc#67890 in the manual mode')
+
+  describe "when the bugzilla-number:open-link event is triggered in editor", ->
+    it "opens the referenced bug in browser", ->
+      url = null
+      spyOn(shell, 'openExternal').andCallFake ->
+        url = shell.openExternal.mostRecentCall.args[0]
+      # position the cursor at the bsc bug ID
+      editor.setCursorBufferPosition([0, 18])
+      atom.commands.dispatch workspaceElement, 'bugzilla-number:open-link'
+
+      expect(url).toEqual("https://bugzilla.suse.com/show_bug.cgi?id=67890")
+      expect(shell.openExternal).toHaveBeenCalled()
+
+    it "does nothing if the cursor is outside of a bug ID", ->
+      spyOn(shell, 'openExternal')
+      # position the cursor at the beginning
+      editor.setCursorBufferPosition([0, 1])
+      atom.commands.dispatch workspaceElement, 'bugzilla-number:open-link'
+
+      expect(shell.openExternal).not.toHaveBeenCalled()
+

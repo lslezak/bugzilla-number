@@ -1,3 +1,4 @@
+# tests for the bug ID grammar
 
 describe 'Bugzilla-number grammar', ->
   grammar = null

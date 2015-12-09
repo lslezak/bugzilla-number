@@ -1,8 +1,8 @@
+# tests for converting a bug ID into the relevant bugzilla URL
 
 BugzillaID = require("../lib/bugzilla-id")
 
 describe "BugzillaID", ->
-
   describe ".bugUrl()", ->
 
     # empty or invalid input
