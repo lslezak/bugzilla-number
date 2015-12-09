@@ -1,8 +1,9 @@
 {CompositeDisposable} = require 'atom'
 # improved version of http://underscorejs.org/ (by Atom developers)
 _ = require 'underscore-plus'
+shell = require 'shell'
 
-BugzillaID = require("bugzilla-id")
+BugzillaID = require './bugzilla-id'
 
 module.exports = BugzillaNumber =
   subscriptions: null
@@ -17,30 +18,34 @@ module.exports = BugzillaNumber =
     @subscriptions = new CompositeDisposable
 
     # Register command that open a bugzilla number
-    @subscriptions.add atom.commands.add 'atom-workspace', 'bugzilla-number:open-link': => @open_link()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'bugzilla-number:open-link': => @openBug()
 
   deactivate: ->
     @subscriptions.dispose()
 
   serialize: ->
 
-  open_link: ->
+  bugId: ->
     return unless editor = atom.workspace.getActiveTextEditor()
     return unless position = editor.getCursorBufferPosition()
 
     return unless token = editor.tokenForBufferPosition(position)
     return unless scopes = token.scopes
 
-    # boo#123
     # get the bugzilla scope at the cursor, using only the first item is safe,
     # the token cannot match more than a single regexp
     bugzilla_scope = _.intersection(scopes, @supported_scopes)[0]
-    console.debug "Bugzilla scope at the cursor: #{bugzilla_scope}"
 
     return unless bugzilla_scope?
+    console.debug "Found Bugzilla scope #{bugzilla_scope} for #{token.value}"
+    token.value
 
-    console.log "Found bugzilla ID at cursor: #{token.value}"
+  openBug: ->
+    # get the URL for the bug ID
+    bug = new BugzillaID(@bugId())
+    bugUrl = bug.bugUrl()
+    return unless bugUrl?
 
-    # TODO: get the URL for the bug ID
-
-    # TODO: open the bug in browser
+    # open the URL in browser
+    console.log "Opening URL in external browser: #{bugUrl}"
+    shell.openExternal(bugUrl)

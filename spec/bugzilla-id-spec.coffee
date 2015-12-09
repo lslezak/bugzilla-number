@@ -49,6 +49,6 @@ describe "BugzillaID", ->
       bug = new BugzillaID("CVE-2015-0042")
       expect(bug.bugUrl()).toEqual("https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0042")
 
-    it "returns a valid URL for a '#gh#yast/yast-core#123' bug", ->
-      bug = new BugzillaID("#gh#yast/yast-core#42")
+    it "returns a valid URL for a 'gh#yast/yast-core#42' bug", ->
+      bug = new BugzillaID("gh#yast/yast-core#42")
       expect(bug.bugUrl()).toEqual("https://github.com/yast/yast-core/issues/42")

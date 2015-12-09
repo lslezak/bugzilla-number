@@ -62,7 +62,7 @@ class BugzillaID
       
     if !@bugzilla?
       # GitHub issue
-      match = /^(#gh#\S+)#(\d+)$/.exec(id)
+      match = /^(gh#\S+)#(\d+)$/.exec(id)
       [_all, @bugzilla, @bugid] = match if match?
 
   bugUrl: ->
@@ -72,9 +72,9 @@ class BugzillaID
     return urlTemplate.replace('%d', @bugid) if urlTemplate?
       
     # handle special cases
-    ghPrefix = '#gh#'
+    ghPrefix = 'gh#'
     if @bugzilla.substr(0, ghPrefix.length) is ghPrefix
-      project = /^#gh#(\S+)$/.exec(@bugzilla)[1]
+      project = /^gh#(\S+)$/.exec(@bugzilla)[1]
       return "https://github.com/#{project}/issues/#{@bugid}" if project?
 
     # not found

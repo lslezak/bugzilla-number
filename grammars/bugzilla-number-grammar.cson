@@ -5,7 +5,7 @@
   {
     # see https://en.opensuse.org/openSUSE:Packaging_Patches_guidelines#Current_set_of_abbreviations
     'match': '\\b(' +
-      'boo|pr|boost|ceph|claws|rt|deb|beo|fate|fdo|gnu|GCC|' +
+      'boo|bsc|pr|boost|ceph|claws|rt|deb|beo|fate|fdo|gnu|GCC|' +
       'bgo|gvz|io|jenk|kde|bko|lp|lf|MeeGo|Mono|bmo|bnc|ITS|i|n|' +
       'os-edu|pidgin.im|rh|bso|sf|swo|t3|webkit|Ximian|bxo|bxc|' +
       # allow some upper case variants
@@ -15,9 +15,8 @@
       ')\\s*(#|)(\\d+)\\b'
     'name': 'storage.type.class.bugzilla-number'
   }
-  # handle special cases
   {
-    # gh#repo#number (e.g. gh#yast/core#123)
+    # gh#repo#number (e.g. gh#yast/yast-core#42)
     'match': '\\bgh#(\\S+)#(\\d+)\\b'
     'name': 'storage.type.class.gh-number'
   }
