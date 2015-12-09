@@ -17,3 +17,4 @@ https://en.opensuse.org/openSUSE:Packaging_Patches_guidelines#Current_set_of_abb
   (`CVE-2015-0042`) and GitHub isues (`gh#yast/yast-core#42`) are supported.
 - The referenced bug can be opened in browser using the `Ctrl-Shift-B` keyboard shortcut.
 
+![Screen cast](https://cloud.githubusercontent.com/assets/907998/11691025/86aa411e-9e99-11e5-94a5-eca67ba74485.gif)
