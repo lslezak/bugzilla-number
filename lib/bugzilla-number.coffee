@@ -2,6 +2,8 @@
 # improved version of http://underscorejs.org/ (by Atom developers)
 _ = require 'underscore-plus'
 
+BugzillaID = require("bugzilla-id")
+
 module.exports = BugzillaNumber =
   subscriptions: null
 
