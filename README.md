@@ -15,5 +15,5 @@ shortcut.
 https://en.opensuse.org/openSUSE:Packaging_Patches_guidelines#Current_set_of_abbreviations),
   like `boo#123456`, `bnc#123456`, `FATE#13245` `rh#132456`. Also CVE
   (`CVE-2015-0042`) and GitHub isues (`gh#yast/yast-core#42`) are supported.
-- The referenced bug can be opened using the `Ctrl-Shift-B` keyboard shortcut.
+- The referenced bug can be opened in browser using the `Ctrl-Shift-B` keyboard shortcut.
 
